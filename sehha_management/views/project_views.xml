@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+
+    <record id="project_view_form_extend" model="ir.ui.view">
+        <field name="name">project.project.kanban</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.view_project_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='project_burndown_menu']" position="after">
+                <div role="menuitem" >
+                    <a name="attachment_tree_view" type="object" context="{'default_projectId': active_id}">Attachments</a>
+                </div>
+                <div role="menuitem" >
+                    <!-- <a name="knowledge_tree_view" type="object">Lessons Learned</a> -->
+                    <a name="document_page.action_page" context="{'search_default_parent': name}" type="action">Lessons Learned</a>
+
+                </div>
+
+            </xpath>
+
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="name"/>
+            </xpath>
+
+        </field>
+    </record>
+
+</data>
+</odoo>

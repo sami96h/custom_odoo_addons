@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+
+    <record id="product_view_form_extend" model="ir.ui.view">
+        <field name="name">product.template.kanban</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='sales']" position="inside">
+            
+                <group>
+                    <group>
+                        <field name="target_sectors" widget="many2many_tags" string="Target Sectors"/>
+                    </group>
+                    <group>
+                        <field name="status"/>
+                    </group>
+                        
+
+                    
+
+                
+                </group>
+            
+            </xpath>
+
+        </field>
+    </record>
+
+</data>
+</odoo>

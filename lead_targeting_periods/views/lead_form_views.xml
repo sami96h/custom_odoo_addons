@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+
+
+    
+        <record model="ir.actions.act_window" id="crm.crm_lead_all_leads">
+            <field name="domain">['|', '|', ('type','=','new'),('type','=','lead'), ('type','=',False)]</field>
+            <field name="context">
+            {
+            'search_default_needs_my_approval':1,
+            }
+            </field>
+
+        </record>
+
+
+        <record id="lead_view_form_extend" model="ir.ui.view">
+            <field name="name">crm.lead.form extend</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+            <field name="arch" type="xml">
+
+                    
+                    
+
+                    <xpath expr="//sheet/*[1]" position="before">
+                        
+                        <widget name="web_ribbon" title="Waiting Approval" attrs="{'invisible': [('type','!=','new')]}"/>
+                        
+                    </xpath>
+
+                    <xpath expr="//field[@name='stage_id']" position="attributes">
+                        
+                        <attribute name="attrs">{'invisible': ['|','|', ('active', '=', False), ('type', '=', 'lead'),('type','=','new')]}</attribute>
+                        
+                    </xpath>
+                    <xpath expr="//button[@name='action_set_won_rainbowman']" position="attributes">
+                        
+                        <attribute name="attrs">{'invisible': ['|','|','|','|',('type','=',False), ('active','=',False), ('probability', '=', 100), ('type', '=', 'lead'),('type','=','new')]}</attribute>
+                        
+                    </xpath>
+                    <xpath expr="//button[@name='%(crm.crm_lead_lost_action)d']" position="attributes">
+                        
+                        <attribute name="attrs">{'invisible': ['|','|','|',('type','=',False),('type','=','new'), ('type', '=', 'lead'), '&amp;',('active', '=', False),('probability', '&lt;', 100)]}</attribute>
+                        
+                    </xpath>
+
+                    
+                    <xpath expr="//button[@name='%(crm.action_crm_lead2opportunity_partner)d']" position="attributes">
+                        
+                        <attribute name="attrs">{'invisible': ['|','|','|',('type','=',False),('type','=','new'),('type', '=', 'opportunity'),('active','=',False)]}</attribute>
+                        
+                    </xpath>
+                    <xpath expr="//button[@name='action_set_lost']" position="attributes">
+                        
+                        <attribute name="attrs">{'invisible': ['|', '|','|',('type','=','new'),('type','=',False),('type', '=', 'opportunity'),'&amp;', ('probability', '=', 0), ('active', '=', False)]}</attribute>
+                        
+                    </xpath>
+                    <xpath expr="//button[@name='action_schedule_meeting']" position="attributes">
+                        
+                        <attribute name="attrs">{'invisible': ['|',('type','=','new'),('type', '=', 'lead')]}</attribute>
+                        
+                    </xpath>
+                    <xpath expr="//field[@name='partner_name']" position="after">
+                        
+                        <field name="targeted_period"/>
+                        
+                    </xpath>
+
+
+                    <xpath expr="//field[@name='partner_id']" position="after">
+                        <field name="type" invisible="1"/>
+                    </xpath> 
+                    <xpath expr="//header" position="inside" >
+                        <button name="do_it" string="Confirm" type="object"
+                                class="oe_highlight" attrs="{'invisible': ['|', '|',('type', '=', 'opportunity'),('type', '=', 'lead'), ('active', '=', False)]}" data-hotkey="v"/>
+                    </xpath>
+                    <xpath expr="//h2[@class='d-flex gap-2 g-0 align-items-end pb-3']/div[position() &lt;= 3]" position="attributes">
+                        <attribute name="attrs">{'invisible': ['|','|',('type','=',False),('type','=','new'),('type', '=', 'lead')]}</attribute>
+                    </xpath> 
+                    
+                    <xpath expr="//group[@name='opportunity_partner']" position="attributes">
+                        <attribute name="attrs">{'invisible': ['|','|',('type','=',False),('type','=','new'),('type', '=', 'lead')]}</attribute>
+                    </xpath> 
+                    
+                    <!-- <xpath expr="//group[@name='lead_info']" position="attributes">
+                        <attribute name="attrs">{'invisible': ['|',('type','=','new'),('type', '=', 'opportunity')]}</attribute>
+                    </xpath>  -->
+                    <xpath expr="//sheet/group/group[4]" position="attributes">
+                        <attribute name="attrs">{'invisible': ['|','|',('type','=',False),('type','=','new'),('type', '=', 'leed')]}</attribute>
+                    </xpath>
+                    <xpath expr="//sheet/group/group[5]" position="attributes">
+                        <attribute name="attrs">{'invisible': ['|','|',('type','=',False),('type','=','new'),('type', '=', 'opportunity')]}</attribute>
+                    </xpath>
+                    <xpath expr="//sheet/group/group[6]" position="attributes">
+                        <attribute name="attrs">{'invisible': ['|','|',('type','=',False),('type','=','new'),('type', '=', 'opportunity')]}</attribute>
+                    </xpath> 
+                    <xpath expr="//notebook" position="attributes">
+                        <attribute name="attrs">{'invisible': ['|',('type','=',False),('type','=','new')]}</attribute>
+                    </xpath> 
+
+    
+    
+
+
+                    <!-- <xpath expr="//page[@name='extra']" position="after">
+                        <page string="Targeted Period">
+                            
+                            <field name = "targeted_period"/>
+                                        
+                            
+                        </page>
+                    
+                    </xpath> -->
+
+            </field>
+        </record>
+
+        <record id="lead_sale_view_form_extend" model="ir.ui.view">
+            <field name="name">crm.lead.form extend sale</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="sale_crm.crm_case_form_view_oppor"/>
+            <field name="arch" type="xml">
+
+                
+                    <xpath expr="//button[@name='action_sale_quotations_new']" position="attributes">
+                        
+                        <attribute name="attrs">{'invisible': ['|','|','|',('type','=',False),('type','=','new'), ('type', '=', 'lead'), '&amp;', ('probability', '=', 0), ('active', '=', False)]}</attribute>
+                        
+                    </xpath>
+                    <xpath expr="//button[@name='action_view_sale_quotation']" position="attributes">
+                        
+                        <attribute name="attrs">{'invisible': ['|',('type','=',False),('type','=','new')]}</attribute>
+                        
+                    </xpath>
+                    <xpath expr="//button[@name='action_view_sale_order']" position="attributes">
+                        
+                        <attribute name="attrs">{'invisible': ['|',('type','=',False),('type','=','new')]}</attribute>
+                        
+                    </xpath>
+
+                    
+
+
+
+            </field>
+        </record>
+
+        <record id="view_crm_lead_filter_extended" model="ir.ui.view">
+            <field name="name">crm.lead.search extended</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.view_crm_case_leads_filter"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//filter[@name='filter_creation_date']" position="after">
+                    
+                    <filter name="needs_my_approval" string="Needs My Approval" domain="[('type', '=', 'new'),('sales_team_leader','=',uid)]"/>
+
+
+                </xpath>
+                <xpath expr="//filter[@name='date_closed']" position="after">
+                     <filter string="Targeting period" name="targetingperiod" context="{'group_by':'targeted_period'}"/>
+
+
+                </xpath>
+
+
+
+            </field>
+        </record>
+
+
+
+</data>
+</odoo>

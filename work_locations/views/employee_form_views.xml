@@ -1,0 +1,44 @@
+<odoo>
+    
+        <!-- Inheriting the existing form view of hr.employee -->
+        <record id="view_employee_form_inherit" model="ir.ui.view">
+            <field name="name">hr.employee.form.inherit</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form" />
+            <field name="arch" type="xml">
+                <!-- Add your customizations to the form view -->
+                <!-- For example, add a field for location assignment -->
+                <xpath expr="//page[@name='hr_settings']" position="after">
+                    <page string="Location Assignments ">
+                       <field name="location_assignment_ids" >
+                            <tree editable="bottom">
+                                <field name="location_id"/>
+                                <field name="start_date"/>
+                                <field name="end_date"/>
+                            </tree>
+                        </field>
+
+                    </page>
+
+                    
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="view_employee_graph" model="ir.ui.view">
+            <field name="name">Employee Graph</field>
+            <field name="model">hr.employee</field>
+            <field name="type">graph</field>
+            <field name="arch" type="xml">
+                <!-- Specify the graph view configuration -->
+                <graph string="Employee Graph">
+                    <field name="work_location_id"/>
+                    <!-- <field name="capacity" type="measure"/> -->
+                    <field name="employee_count" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+    
+</odoo>

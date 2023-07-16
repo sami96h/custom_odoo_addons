@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+
+    <record id="periods_action" model="ir.actions.act_window">
+		<field name="name">Periods</field>
+		<field name="res_model">lead.targeted.period</field>
+		<field name="view_mode">tree,form,kanban</field>
+
+	</record>
+
+
+
+        <menuitem
+        id="leads_periods_menu"
+        name="Periods"
+        parent="crm.crm_menu_root"
+        action="periods_action"
+        
+        />
+
+    <record id="targeted_lead_view_tree" model="ir.ui.view">
+        <field name="name">lead.targeted.period.tree</field>
+        <field name="model">lead.targeted.period</field>
+        <field name="arch" type="xml">
+                    
+                    
+        <tree>
+                                    
+            <field name="year" string="Year"/>
+            <field name="quarter" string="Quarter"/>
+
+                                    
+        </tree>
+
+                    
+                    
+
+        </field>
+    </record>
+
+    <record id="targeted_lead_view_form" model="ir.ui.view">
+        <field name="name">lead.targeted.period.form</field>
+        <field name="model">lead.targeted.period</field>
+        <field name="arch" type="xml">
+             <form string="Estate Property">       
+            <sheet>
+                <group>
+                    <field name="year" string="Year"/>
+                    <field name="quarter" string="Quarter"/>
+                    <!-- <field name="lead_id" widget="many2many_tags"/> -->
+                </group>
+
+                <notebook>
+                 <page string="Leads">
+                    <sheet>
+                       
+                        
+                            <field name="lead_ids"/>
+                       
+                    
+                    </sheet>
+                 </page>
+                </notebook>                          
+
+            </sheet> 
+            </form>      
+        
+
+                                    
+        
+
+                    
+                    
+
+        </field>
+    </record>
+
+
+</data>
+</odoo>
